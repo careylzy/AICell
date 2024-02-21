@@ -178,14 +178,15 @@ router.post('/create-cell', async (req: any, res) => {
             encryptURL,
             tokeninfo: JSON.parse(tokeninfo),
             logoFile: uploadLogoRes.url,
-            image: "https://sp.web3go.xyz/view/ai-cell-test-bucket/fold-cell/cell_image.png"
+            image: "https://sp.web3go.xyz/view/ai-cell-test-bucket/fold-logo/nft_v1_image.png"
         };
         const handledName = name.replace(/\s/g, '_').toLocaleLowerCase();
         const metaFileName = `${date}_${handledName}.json`;
         let uploadMetaRes = await bnbGreenfield.createObject(bnbGreenfield.bucketName, metaFileName, Buffer.from(JSON.stringify(metadata), 'utf-8'), 'json', bnbGreenfield.cellFoldName);
 
         // Save into db
-        metadata['metadataTxhash'] = uploadMetaRes.txhash; // bnb-greenfield upload txhash
+        metadata['metadataTxhash'] = uploadMetaRes.txhash; // bnb-greenfield create txhash
+        metadata['metadataObjectId'] = uploadMetaRes.objectId; // bnb-greefield objecId
         let saved = await cellsService.insertOne(metadata);
 
         // Return

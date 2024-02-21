@@ -1,4 +1,4 @@
-const { Client } = require('@bnb-chain/greenfield-js-sdk');
+const { Client, encodeToHexString } = require('@bnb-chain/greenfield-js-sdk');
 const { ReedSolomon } = require('@bnb-chain/reed-solomon');
 const { APP_ENV } = require("../constants");
 
@@ -178,7 +178,21 @@ class BNBGreenfield {
             privateKey: this.getPrivateKey(),
         });
 
-        const uploadRes = await this.client.object.uploadObject({
+        let objectId;
+        for (let i = 0; i < createObjectRes.events.length; i++) {
+            const event = createObjectRes.events[i];
+            if (event.type == "greenfield.storage.EventCreateObject") {
+                for (let j = 0; j < event.attributes.length; j++) {
+                    if (event.attributes[j].key == "object_id") {
+                        const objectIdInt = parseInt(event.attributes[j].value.replace(/"/g, '')).toString(16);
+                        console.log(objectIdInt)
+                        objectId = '0x' + objectIdInt.padStart(64, '0')
+                    }
+                }
+            }
+        }
+
+        await this.client.object.uploadObject({
             bucketName: bucketName,
             objectName: objectName,
             body: fileBuffer,
@@ -194,8 +208,8 @@ class BNBGreenfield {
         } else {
             url = `https://sp.web3go.xyz/view/${bucketName}/${fileName}`
         }
-        
-        return { txhash: createObjectRes.transactionHash, url: url };
+
+        return { txhash: createObjectRes.transactionHash, objectId: objectId, url: url };
     }
 
     async listObjects(bucketName) {

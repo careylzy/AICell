@@ -1,3 +1,4 @@
+import { encodeToHexString } from "@bnb-chain/greenfield-js-sdk";
 import bnbGreenfield from "../src/storage/bnbGreenfield";
 import fs from "fs";
 
@@ -28,7 +29,7 @@ describe("bnbGreenfield", async () => {
   });
 
   it("createObject_json", async () => {
-    const fileName = "user_d.json";
+    const fileName = "test_18.json";
     const metadata = {
       owner: "0xde51312CdF679e042B41dC8dd5F00984d0f5bbE2",
       requestAuthorUrl: "https://github.com/tdergouzi",
@@ -52,22 +53,22 @@ describe("bnbGreenfield", async () => {
       fileName,
       Buffer.from(JSON.stringify(metadata)),
       "json",
-      "ted-test-object"
+      "test-object"
     );
     console.log(res);
   });
 
   it("createObject_png", async () => {
-    const fileName = "test_image.png";
+    const fileName = "nft_v1_image.png";
     let fileBuffer = await fs.readFileSync(
-      __dirname + "/../src/data/test_image.png"
+      __dirname + "/../src/data/nft_image.png"
     );
     let res = await bnbGreenfield.createObject(
       bnbGreenfield.bucketName,
       fileName,
       fileBuffer,
       "image/png",
-      "ted-test-object"
+      bnbGreenfield.logoFoldName
     );
     console.log(res);
   });
