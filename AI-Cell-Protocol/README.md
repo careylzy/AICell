@@ -124,6 +124,6 @@ yarn test test/Factory.test.ts
 
 ### Bsc Testnet
 ```
-Registry: "0x2Cb12E1c44dEc6181F947266f2B259f3f1362f3b"
-Factory: "0xeD683f980f861Bc7eadbdC9445415654A1CFE897"
+Registry: "0x126d972695B13574029082CE1586c7C5596C3A4C"
+Factory: "0x6eADA8d543Ae8aF4cD146952a1ccB2FAe697EC5F"
 ```
