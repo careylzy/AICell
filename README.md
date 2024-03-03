@@ -17,7 +17,7 @@ https://aicell.world/
 # Module
 
 ## AICell-Server
-This repository contains the core smart contracts for the AICell Protocol. 
+This repository is the server code for the AICell project. The server-side operates as a crucial hub for cell management, facilitating both the creation and invocation phases. It also plays a critical role in third-party call handling, parsing user inputs and returned data effectively. With BNB-Greenfield integration, operational excellency is ensured, as an on-chain evidence system oversees all procedures. This storeroom of functionalities streams together the comprehensive landscape of our project's server component.
 
 ## AICell-Protocol
-This repository is the server code for the AICell project. The server-side operates as a crucial hub for cell management, facilitating both the creation and invocation phases. It also plays a critical role in third-party call handling, parsing user inputs and returned data effectively. With BNB-Greenfield integration, operational excellency is ensured, as an on-chain evidence system oversees all procedures. This storeroom of functionalities streams together the comprehensive landscape of our project's server component.
+This repository contains the core smart contracts for the AICell Protocol. 
